@@ -1,0 +1,3 @@
+<!--logs.wxml-->
+<text class="logsInstro">logs.wxml</text>
+<view class="logsInstro">我是第二页</view>

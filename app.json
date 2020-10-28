@@ -1,0 +1,50 @@
+{
+  "pages":[
+    "index/index",
+    "logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#f5f5f9",
+    "navigationBarTitleText": "测试测试",
+    "navigationBarTextStyle":"black",
+    "backgroundColor": "#ff0000"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "logs/logs",
+        "text": "第二页"
+      }
+    ],
+    "color": "#228B22",
+    "selectedColor": "#EE82EE",
+    "backgroundColor": "#f5f5f9",
+    "borderStyle": "black",
+    "position": "bottom",
+    "custom": false
+  },
+  "networkTimeout":{
+    "request": 3000,
+    "connectSocket": 3000,
+    "uploadFile": 3000,
+    "downloadFile": 3000
+  },
+  "functionalPages":false,
+  "requiredBackgroundModes": [
+    "audio","location"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "小程序要测试使用你的的地理位置"
+    }
+  },
+  "debug": true,
+ "lazyCodeLoading": "requiredComponents"
+}
