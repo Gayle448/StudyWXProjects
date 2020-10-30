@@ -116,7 +116,7 @@ Page({
     viewClick : function () {
       console.log('呀，我被点击啦！')
     },
-    jumpToNext : function () { //todo 这个下级页面通信报错
+    jumpToNext : function () { //todo 这个下级页面通信报错 测试提交到远程github
       wx.navigateTo({
         url: '../demo/demo',
         events: {
