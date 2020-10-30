@@ -1,2 +1,13 @@
 <view class="intro">欢迎使用微信，这是我的第一行文字</view>
-<text class="intro"> Hello,I am Gayle</text>
+<text class="intro" > Hello,I am Gayle</text>
+<view class="intro">{{text}}</view>
+<text class="intro">{{array[0].msg}}</text>
+
+<!-- 添加一个按钮点击事件 -->
+<text bindtap="viewClick" class="ontro"> 点击我吧 </text>
+<!-- 不是同一个模块的js 和wxml不能互通，目前来看 -->
+<!-- <text>{{haha}}</text>  -->
+
+<view>
+  <button class="intro" bindtap="jumpToNext">点击进入下一个页面</button>
+</view>
