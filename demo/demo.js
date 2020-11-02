@@ -9,10 +9,12 @@ Page({
   },
 
   onLoad: function (option) { //todo 这个下级页面通信报错
+    console.log('demo页面加载成功----')
     //被打开的页面可以通过 this.getOpenerEventChannel() 方法来获得一个 EventChannel 对象；
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.emit('getDataFromDemoPage', {data : '从下级demo页面传值到上一个页面'});
     eventChannel.on('getDataFromIndexPage', function (data) {  //从上级index页面调到下一个页面传值过来
+      console.log('index页面传参数过来----')
       console.log(data)
     })
     //EventChannel 对象 会回调给上级打开页面的 success里面

@@ -120,11 +120,13 @@ Page({
       wx.navigateTo({
         url: '../demo/demo',
         events: {
-          getDataFromDemoPage : function (data) {
+          getDataFromDemoPage : function(data) {
+            console.log('demo页面传参数过来----')
             console.log(data) //下个页面传过来的数据
           }
         },
-        success: function (res) {
+        success: function(res) {
+          console.log('index跳转成功----')
           res.eventChannel.emit('getDataFromIndexPage', {data : '从index页面传到下个页面的数据'})
         }
       })
