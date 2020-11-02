@@ -8,7 +8,7 @@ Page({
     }
   },
 
-  onLoad: function (option) { //todo 这个下级页面通信报错
+  onLoad: function (option) { //todo 这个下级页面通信报错；待查
     console.log('demo页面加载成功----')
     //被打开的页面可以通过 this.getOpenerEventChannel() 方法来获得一个 EventChannel 对象；
     const eventChannel = this.getOpenerEventChannel()
@@ -45,9 +45,11 @@ Page({
     this.setData({
       'object.text': 'changed data'
     });
-  },addNewField: function() {
+  },
+  addNewField: function() {
     this.setData({
       'newField.text': 'new data'
     })
   }
+
 })

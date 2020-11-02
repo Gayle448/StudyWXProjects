@@ -1,5 +1,6 @@
 <view class="intro">欢迎使用微信，这是我的第一行文字</view>
 <text class="intro" > Hello,I am Gayle</text>
+<!-- 数据绑定 -->
 <view class="intro">{{text}}</view>
 <text class="intro">{{array[0].msg}}</text>
 
@@ -11,3 +12,50 @@
 <view>
   <button class="intro" bindtap="jumpToNext">点击进入下一个页面</button>
 </view>
+
+<!-- 列表渲染，遍历展示？ -->
+<view wx:for="{{list}}" class="intro">{{item}}</view>
+
+<!-- 条件渲染 -->
+<view wx:if="{{view == 'WEBVIEW'}}" class="ontro"> WEBVIEW </view>
+<view wx:elif="{{view == 'APP'}}" class="ontro"> APP </view>
+<view wx:else="{{view == 'MINA'}}" class="ontro"> MINA </view>
+
+<!-- 模板 ...是什么意思-->
+<template name="staffName">
+  <view class="intro">
+    FirstName:{{firstname}},
+    LastName:{{lastName}}
+  </view>
+</template>
+<template is="staffName" data="{{...staffA}}">
+</template>
+<template is="staffName" data="{{...staffB}}">
+</template>
+<template is="staffName" data="{{...staffC}}">
+</template>
+
+
+<!-- WXS（WeiXin Script）是小程序的一套脚本语言，结合 WXML，可以构建出页面的结构。 -->
+<wxs module="m1">
+  var msg = "hello world"
+  module.exports.message =msg;
+</wxs>
+<view>
+  {{m1.message}}
+</view>
+
+<!-- 下面的 getMax 函数，接受一个数组，且返回数组中最大的元素的值 -->
+<wxs module="m2">
+  var getMax = function(array) {
+    var max = undefined;
+    for (var i = 0;i < array.length; ++i) {
+      max = max === undefined ? array[i ] : (max >= array[i] ? max : array[i]);
+    }
+    return max;
+  }
+  module.exports.getMax = getMax;
+</wxs>
+
+<!-- 调用 wxs 里面的 getMax 函数，参数为 page.js 里面的 array -->
+<view> {{m2.getMax(list)}} </view>

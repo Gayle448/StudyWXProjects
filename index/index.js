@@ -1,5 +1,6 @@
 const app = getApp()
 
+//使用 Page() 构造器注册页面
 Page({
   data: {//参与页面渲染的数据。data 是页面第一次渲染使用的初始数据。
     //这里面不能打console ?
@@ -12,7 +13,12 @@ Page({
       {
         msg:'第二个数据'
       }
-    ]
+    ],
+    list:[1,2,3,4,5],
+    view: 'APP',
+    staffA:{firstname:'chen',lastName:'jian'},
+    staffB:{firstname:'han',lastName:'xu'},
+    staffC:{firstname:'chen',lastName:'xuyuan'}
   },
   onLoad: function () {//页面渲染后 执行
     console.log('代码片段是一种迷你、可分享的小程序或小游戏项目，可用于分享小程序和小游戏的开发经验、展示组件和 API 的使用、复现开发问题和 Bug 等。可点击以下链接查看代码片段的详细文档：')
@@ -21,6 +27,24 @@ Page({
 
      //页面创建时执行;页面加载时触发。一个页面只会调用一次，可以在 onLoad 的参数中获取打开当前页面路径中的参数。
      console.log('当前面的路径',this.route) //打印当前页面路径
+
+     //获取当前页面栈
+     const pages = getCurrentPages()
+     console.log('获取当前页面栈',pages[0]) 
+     /*数组中第一个元素为首页，最后一个元素为当前页面。
+     不要尝试修改页面栈，会导致路由以及页面状态错误。
+     不要在 App.onLaunch 的时候调用 getCurrentPages()，此时 page 还没有生成。
+     */
+
+     //console 类型：
+     console.debug('----debug日志')
+     console.log('----log日志')
+     console.info('----info日志')
+     console.warn('----warn日志')
+     console.error('----error日志')
+     console.group('----分组日志')
+     console.groupEnd()
+     
   },
   onShow: function () {
 //页面出现在前台执行
@@ -116,19 +140,31 @@ Page({
     viewClick : function () {
       console.log('呀，我被点击啦！')
     },
-    jumpToNext : function () { //todo 这个下级页面通信报错 测试提交到远程github
+    jumpToNext : function () { 
       wx.navigateTo({
         url: '../demo/demo',
         events: {
-          getDataFromDemoPage : function(data) {
+          // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+          getDataFromDemoPage : function (data) {
             console.log('demo页面传参数过来----')
             console.log(data) //下个页面传过来的数据
           }
         },
-        success: function(res) {
+        success: function (res) {
           console.log('index跳转成功----')
-          res.eventChannel.emit('getDataFromIndexPage', {data : '从index页面传到下个页面的数据'})
+          //通过eventChannel向被打开页面传送数据
+          res.eventChannel.emit('getDataFromIndexPage', {data : '从index页面传到下个页面的数据'}) //todo 这个下级页面通信报错；待查
         }
       })
     }
 })
+
+//使用compnent构造页面
+// Component({
+//   data:{
+
+//   },
+//   methods:{ //单独放方法的
+
+//   }
+// })
