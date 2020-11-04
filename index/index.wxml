@@ -4,21 +4,78 @@
 <view class="intro">{{text}}</view>
 <text class="intro">{{array[0].msg}}</text>
 
+<!-- 单向绑定 js pagedata里面可以通过设置inputvalue来改变输入框的值，那么输入框的值变了怎么改变data里面的inputvalue呢，需要双向绑定-->
+<input value="{{inputValue}}" class="pinktro" />
+<!-- 双向绑定 todo 1103.02 说是加个model就可以，输入框改变inputvalue值就会变用到这个值的地方也会跟着变，测试没反应啊-->
+<input model:value="{{inputValue}}" class="intro" />
+
 <!-- 添加一个按钮点击事件 -->
 <text bindtap="viewClick" class="ontro"> 点击我吧 </text>
-<!-- 不是同一个模块的js 和wxml不能互通，目前来看 -->
-<!-- <text>{{haha}}</text>  -->
-
 <view>
   <button class="intro" bindtap="jumpToNext">点击进入下一个页面</button>
 </view>
+<!-- clickName是一个data里的属性值，key-对应的value是对应function的名字 -->
+<text bindtap="{{clickName}}">再来点击我，传值</text> 
+<!-- 不是同一个模块的js 和wxml不能互通，目前来看 -->
+<!-- <text>{{haha}}</text>  -->
+
+<!-- 使用WXS函数响应事件 绑定的WXS函数必须用{{}}括起来** -->
+<!-- <wxs module="wxs" src="./index.wxs"></wxs>  //todo 1102.01 编译报错
+<view bindtap="{{wxs.tapTest}}">点击我吧</view> -->
+
+<!-- 事件分为冒泡事件和非冒泡事件：
+冒泡事件：当一个组件上的事件被触发后，该事件会向父节点传递。
+非冒泡事件：当一个组件上的事件被触发后，该事件不会向父节点传递。 -->
+<view id="outer" bindtap="handletap1" class="intro">
+outer view
+  <view id="middle" bindtap="handletap2" class="intro">
+    middle view
+      <view id="inner" bindtap="handletap3" class="intro">
+        inner view
+      </view>
+  </view>
+</view>
+
+<!-- 绑定并阻事件冒泡 : 下边这个例子中，点击 inner view 会先后调用handleTap3和handleTap2(因为tap事件会冒泡到 middle view，而 middle view 阻止了 tap 事件冒泡，不再向父节点传递)，点击 middle view 会触发handleTap2，点击 outer view 会触发handleTap1。-->
+<view id="outer" bindtap="handletap1" class="pinktro">
+outer view
+  <view id="middle" catchtap="handletap2" class="pinktro">
+    middle view
+      <view id="inner" bindtap="handletap3" class="pinktro">
+        inner view
+      </view>
+  </view>
+</view>
+
+<!-- 互斥事件绑定 所有 mut-bind 是“互斥”的，只会有其中一个绑定函数被触发。同时，它完全不影响 bind 和 catch 的绑定效果。 todo : 1102.02 mut-bind:tap 点击不进function方法-->
+<view id="mouter" mut-bind:tap="handletap0" class="intro">
+mouter view --
+  <view id="outer" bindtap="handletap1" class="pinktro">
+  outer view
+    <view id="middle" catchtap="handletap2" class="pinktro">
+     middle view
+        <view id="inner" mut-bind:tap="handletap3" class="pinktro">
+          inner view
+        </view>
+    </view>
+  </view>
+</view>
+
+<!-- 事件的捕获阶段 点击inner 4-3-1;点击outer 2-1;将下面代码中的第一个capture-bind改为capture-catch，将只触发handletap2-->
+<view id="outer" bind:touchstart="handletap1" capture-bind:touchstart="handletap2" class="pinktro">
+  outer view
+  <view id="inner" bind:touchstart="handletap3" capture-bind:touchstart="handletap4" class="intro">
+    inner view
+  </view>
+</view>
+
 
 <!-- 列表渲染，遍历展示？ -->
 <view wx:for="{{list}}" class="intro">{{item}}</view>
 
 <!-- 条件渲染 -->
 <view wx:if="{{view == 'WEBVIEW'}}" class="ontro"> WEBVIEW </view>
-<view wx:elif="{{view == 'APP'}}" class="ontro"> APP </view>
+<view wx:elif="{{view == 'APP'}}" class="pinktro"> APP </view>
 <view wx:else="{{view == 'MINA'}}" class="ontro"> MINA </view>
 
 <!-- 模板 ...是什么意思-->
@@ -59,3 +116,9 @@
 
 <!-- 调用 wxs 里面的 getMax 函数，参数为 page.js 里面的 array -->
 <view> {{m2.getMax(list)}} </view>
+
+<!-- WXS响应事件，例子  todo ：1103.01 看不懂 -->
+<!-- <wxs module="test" src="./index.wxs"></wxs>
+<view change:prop="{{test.propObserver}}" prop="{{propValue}}" bindtouchmove="{{test.touchmove}}" class="movable"></view> -->
+
+<button id="queryBtn" bindtap="queryAction" class="pinktro"> 点击我查当前节点位置 </button>

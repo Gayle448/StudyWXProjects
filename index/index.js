@@ -6,6 +6,7 @@ Page({
     //这里面不能打console ?
     //页面加载时，data 将会以JSON字符串的形式由逻辑层传至渲染层，因此data中的数据必须是可以转成JSON的类型：字符串，数字，布尔值，对象，数组。渲染层可以通过 WXML 对数据进行绑定。
     text : '我的测试数据',
+    clickName : "handleClick",
     array:[
       {
         msg:'第一个数据'
@@ -18,7 +19,8 @@ Page({
     view: 'APP',
     staffA:{firstname:'chen',lastName:'jian'},
     staffB:{firstname:'han',lastName:'xu'},
-    staffC:{firstname:'chen',lastName:'xuyuan'}
+    staffC:{firstname:'chen',lastName:'xuyuan'},
+    inputValue: "输入测试数据"
   },
   onLoad: function () {//页面渲染后 执行
     console.log('代码片段是一种迷你、可分享的小程序或小游戏项目，可用于分享小程序和小游戏的开发经验、展示组件和 API 的使用、复现开发问题和 Bug 等。可点击以下链接查看代码片段的详细文档：')
@@ -113,6 +115,8 @@ Page({
     console.log(item.pagePath)  //被点击的页面路径
     console.log(item.text)  //被点击的文字
   },
+
+  // 事件对象: 如无特殊说明，当组件触发事件时，逻辑层绑定该事件的处理函数会收到一个事件对象。
   //组件事件处理函数1
   viewTap : function () {
     //setData 函数用于将数据从逻辑层发送到视图层（异步），同时改变对应的 this.data 的值（同步）。
@@ -138,7 +142,11 @@ Page({
     
     //组件事件处理函数2
     viewClick : function () {
+      this.setData({inputValue:'点击改变上面输入框文字'})
       console.log('呀，我被点击啦！')
+    },
+    handleClick : function () {
+      console.log('呀，又被你点击了！')
     },
     jumpToNext : function () { 
       wx.navigateTo({
@@ -156,8 +164,43 @@ Page({
           res.eventChannel.emit('getDataFromIndexPage', {data : '从index页面传到下个页面的数据'}) //todo 这个下级页面通信报错；待查
         }
       })
+    },
+    handletap1 : function () {
+      console.log('handletap1')
+    },
+    handletap2 : function () {
+      console.log('handletap2')
+    },
+    handletap3 : function () {
+      console.log('handletap3')
+    },
+    handletap0 : function () {
+      console.log('handletap0')
+    },
+    handletap4 : function () {
+      console.log('handletap4')
+    },
+    queryAction : function () {
+      const query = wx.createSelectorQuery()
+      // query.select('#queryBtn').boundingClientRect()
+      query.select('#queryBtn').boundingClientRect(function(res){
+        console.log(res.top)
+       }
+      )
+    //  query.selectViewport().scrollOffset()
+    query.selectViewport().scrollOffset(function(res){
+      console.log(res.scrollTop)
+    }
+    )
+    query.exec()
+    //   query.exec(function(res){
+    //       res[0].top // #the-id节点的上边界坐标
+    //       res[1].scrollTop // 显示区域的竖直滚动位置
+    //   }
+    //   )
     }
 })
+
 
 //使用compnent构造页面
 // Component({
