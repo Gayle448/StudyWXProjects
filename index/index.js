@@ -43,7 +43,7 @@ Page({
      console.log('----log日志')
      console.info('----info日志')
      console.warn('----warn日志')
-     console.error('----error日志')
+    //  console.error('----error日志')
      console.group('----分组日志')
      console.groupEnd()
      

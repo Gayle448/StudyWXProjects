@@ -2,7 +2,8 @@
   "pages":[
     "index/index",
     "logs/logs",
-    "demo/demo"
+    "demo/demo",
+    "second/second"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -21,7 +22,7 @@
       },
       {
         "pagePath": "logs/logs",
-        "text": "第二页"
+        "text": "第二标签页"
       }
     ],
     "color": "#228B22",

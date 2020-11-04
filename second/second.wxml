@@ -1,0 +1,14 @@
+<!--second.wxml-->
+<text>{{title}}</text>
+<view class="secondstro"> 我是second页面 </view>
+
+<!-- 画布 -->
+<canvas canvas-id="myFirstCanvas" style="border:2px solid; margin:5px;" bindtouchstart="start" bindtouchmove="move" bindtouchend="end"></canvas>
+
+<view hidden="{{hidden}}">
+  Coordinates:({{x}},{{y}})
+</view>
+
+<!-- 渐变 -->
+<canvas canvas-id="mySecondCanvas" style="border:2px solid; margin:5px;"></canvas>
+<canvas canvas-id="myThirdCanvas" style="border:2px solid; margin:5px;"></canvas>

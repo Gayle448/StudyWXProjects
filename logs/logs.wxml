@@ -1,3 +1,7 @@
 <!--logs.wxml-->
-<text class="logsInstro">logs.wxml</text>
-<view class="logsInstro">我是第二页</view>
+<view class="logsInstro">我是第二个标签页</view>
+<view class="logsInstro">
+  <button class="intro" bindtap="jumpToSecondPage">
+    进入二级页面
+  </button>
+</view>

@@ -62,5 +62,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  //跳转到第二个页面
+  jumpToSecondPage : function () {
+    wx.navigateTo({
+      url: '../second/second',
+      success:function(res) {
+        console.log('跳转到第二个标签页的二级页面')
+      }
+    })
   }
 })
