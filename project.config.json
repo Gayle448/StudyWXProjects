@@ -35,7 +35,7 @@
     "packNpmRelationList": []
   },
   "compileType": "miniprogram",
-  "libVersion": "2.0.4",
+  "libVersion": "2.14.0",
   "appid": "wxb07929ea87014a0c",
   "projectname": "JiaChang",
   "debugOptions": {
