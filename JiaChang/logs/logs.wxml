@@ -5,3 +5,5 @@
     进入二级页面
   </button>
 </view>
+
+<text bindtap="gotoUIPage" class="logsInstro"> 点击进入UI组件页面 </text>

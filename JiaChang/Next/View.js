@@ -1,11 +1,15 @@
-// logs.js
+// Next/View.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    haha : '我是logs的数据'
+    latitude: 23.099994,
+    longitude: 113.324520,
+    scale: 1,
+    toView: 'green',
+    background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
   },
 
   /**
@@ -61,23 +65,30 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return {
+      title: 'cover-view',
+      path: 'page/component/pages/cover-view/cover-view'
+    }
   },
-  //跳转到第二个页面
-  jumpToSecondPage : function () {
-    wx.navigateTo({
-      url: '../second/second',
-      success:function(res) {
-        console.log('跳转到第二个标签页的二级页面')
-      }
+  tap2() {
+    this.setData({
+      scale: 3
     })
   },
-  gotoUIPage : function () {
-    wx.navigateTo({
-      url: '../Next/detail',
-      success:function(res){
-        console.log('当前查看的是UI页面')
-      }
+  //scrollview滚动到顶部时调用
+  upper () {
+    console.log('滚到了顶部哦')
+  },
+  //scrollview滚动到底部时调用
+  lower () {
+    console.log('滚到了底部')
+  },  
+  scroll () {
+    console.log('正在滚动')
+  },
+  scrollToTop() {
+    this.setAction({
+      scrollTop: 0
     })
-  }
+  },
 })

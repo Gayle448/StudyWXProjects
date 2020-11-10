@@ -4,7 +4,8 @@
     "logs/logs",
     "demo/demo",
     "second/second",
-    "Next/detail"
+    "Next/detail",
+    "Next/View"
   ],
   "window": {
     "backgroundTextStyle": "light",

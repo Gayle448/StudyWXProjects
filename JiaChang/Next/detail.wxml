@@ -1,2 +1,2 @@
 <!--Next/detail.wxml-->
-<text>Next/detail.wxml</text>
+<text bindtap="viewPage" class="alltro">look-view</text>

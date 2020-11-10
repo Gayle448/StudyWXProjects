@@ -1,0 +1,79 @@
+/* Next/View.wxss */
+@import "./weui.wxss";
+
+.cover-view {
+  position: absolute;
+  top: calc(50% - 150rpx);
+  left: calc(50% - 300rpx);
+  /* opacity: .7; */
+}
+
+.flex-wrp{
+  display:flex;
+}
+
+.flex-item{
+  width: 200rpx;
+  height: 300rpx;
+  font-size: 26rpx;
+}
+
+.flex-item1{
+  left: 50;
+  top: 50; 
+  /* left 和top设置没用 */
+  width: 50rpx;
+  height: 50rpx;
+  font-size: 26rpx;
+}
+
+.demo-text-1 {
+  background: rgba(26, 173, 25, 0.7);
+}
+
+.demo-text-2 {
+  background: rgba(39, 130, 215, 0.7);
+}
+
+.demo-text-3 {
+  background: #ccc;
+}
+
+/* 这个叫什么选择器啊，直接定义标签的样式 */
+movable-area {
+  height: 400rpx;
+  width: 400rpx;
+  margin: 50rpx;
+  background-color: #ccc;
+  overflow: hidden;
+}
+
+movable-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  width: 100rpx;
+  background: #1AAD19;
+  color: #fff;
+}
+
+.page-section-spacing{
+  margin-top: 60rpx;
+}
+.scroll-view_H{
+  white-space: nowrap;
+}
+.scroll-view-item{
+  height: 300rpx;
+}
+.scroll-view-item_H{
+  display: inline-block;
+  width: 100%;
+  height: 300rpx;
+}
+.swiper-item{
+  display: block;
+  height: 150px;
+}
+

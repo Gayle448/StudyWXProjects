@@ -62,5 +62,13 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  viewPage : function () {
+    wx.navigateTo({
+      url: './View',
+      success:function(res) {
+        console.log('跳转到view页面')
+      }
+    })
+  } 
 })

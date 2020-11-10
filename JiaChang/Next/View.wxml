@@ -1,0 +1,146 @@
+<!--Next/View.wxml-->
+<text class="alltro">cover-view:</text>
+
+<view class="container"> 这嵌套的也太多层了吧，不知道这么多层view 的目的是什么 todo
+  <view class="page-body"> 第二层
+    <view class="page-section page-section-gap"> 第三层
+      <map
+        style="width: 100%; height: 300px;"
+        latitude="{{latitude}}"
+        longitude="{{longitude}}"
+      >
+        <cover-view class="cover-view"> 代表，我们可以部分覆盖在某些组件上，此处子覆盖在map上，覆盖view1
+          <cover-view class="container"> 覆盖view2
+            <cover-view class="flex-wrp" style="flex-direction:row;"> 
+              <!-- 覆盖view3 -->
+              <cover-view class="flex-item demo-text-1">覆盖view4</cover-view>
+              <cover-view class="flex-item demo-text-2">覆盖view5</cover-view>
+              <cover-view class="flex-item demo-text-3">覆盖view6
+                <cover-image src="./beauty.png"></cover-image>
+              </cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+      </map>
+    </view>
+  </view>
+</view>
+
+<match-media min-width="300" max-width="600">
+  <view>
+    当页面宽度在 300 ~ 500 px 之间时展示这里
+  </view>
+</match-media>
+
+<!-- todo 为啥不显示 -->
+<match-media max-height="200" orientation="landscape">
+  <view>
+    当页面高度不小于 200 px 且屏幕方向为纵向时展示这里
+  </view>
+</match-media>
+
+<!-- 
+可移动view：movable-view必须在 movable-area 组件中，并且必须是直接子节点，否则不能移动。
+movable-view 必须设置width和height属性，不设置默认为10px;
+movable-view 默认为绝对定位，top和left属性为0px;
+-->
+<!-- 情况1:movable-view < movable-area -->
+<view>
+  <movable-area class="flex-item demo-text-3">
+    <movable-view class="flex-item1 demo-text-1" direction="all" x="10" y="10">
+     text
+    </movable-view>
+  </movable-area>
+
+  <!-- 另一种选择器 -->
+  <!-- <movable-area>
+    这里可以设置移动view的x,y坐标，注意是一个变量，值改变了，UI也会变
+      <movable-view x="{{x}}" y="{{y}}" direction="all">text</movable-view>
+    </movable-area> -->
+</view>
+<!-- 情况2:movable-view > movable-area -->
+<view>
+  <movable-area class="flex-item1 demo-text-3">
+    <movable-view class="flex-item demo-text-1" direction="all">
+     text
+    </movable-view>
+  </movable-area>
+</view>
+<!-- 情况3:movable-view 可超出area边界 -->
+<view>
+  <movable-area class="flex-item demo-text-3">
+    <movable-view class="flex-item1 demo-text-1" direction="all" out-of-bounds>
+     text
+    </movable-view>
+  </movable-area>
+</view>
+<!-- 情况4:movable-view 带有惯性 -->
+<view>
+  <movable-area class="flex-item demo-text-3">
+    <movable-view class="flex-item1 demo-text-1" direction="all" inertia>
+     text
+    </movable-view>
+  </movable-area>
+</view>
+<!-- 情况5:area 带有惯性 -->
+<view>
+  <movable-area class="flex-item demo-text-3" scale-area>
+    <movable-view class="flex-item1 demo-text-1" direction="all" scale scale-min="0.5" scale-max="4" scale-value="{{scale}}">
+     text
+    </movable-view>
+  </movable-area>
+</view>
+<view>
+    <button bindtap="tap2" class="alltro" type="primary">点击放大3倍</button>
+</view>
+
+<!-- 滚动scrollview ：https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html-->
+<view class="container">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="page-section-title">
+        <text>Vertical Scroll\n纵向滚动</text>
+      </view>
+      <view class="page-section-spacing">
+        <!-- scroll-y :是否允许纵向滚动<如果同时设置了两个，以后面那个为准> 
+          todo:scroll-into-view:值应为某子元素id（id不能以数字开头）。设置哪个方向可滚动，则在哪个方向滚动到该元素?-->
+        <scroll-view scroll-y="true" style="height: 300rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+          <!-- view1 高度300，背景绿色 -->
+          <view id="demo1" class="scroll-view-item demo-text-1"></view>
+          <view id="demo2"  class="scroll-view-item demo-text-2"></view>
+          <view id="demo3" class="scroll-view-item demo-text-3"></view>
+        </scroll-view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="page-section-title">
+        <text>Horizontal Scroll\n横向滚动</text>
+      </view>
+      <view class="page-section-spacing">
+        <scroll-view class="scroll-view_H" scroll-x="true" bindscroll="scroll" style="width: 100%">
+          <view id="demo1" class="scroll-view-item_H demo-text-1"></view>
+          <view id="demo2"  class="scroll-view-item_H demo-text-2"></view>
+          <view id="demo3" class="scroll-view-item_H demo-text-3"></view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 广告轮播图 -->
+<view>
+  <swiper indicator-dots="true" autoplay="false" circular="true" vertical="false" previous-margin="5px" next-margin="5px">
+    <!-- todo:下面这段代码还是没理解 -->
+    <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+            <view class="swiper-item {{item}}"></view>
+          </swiper-item>
+        </block>
+  </swiper> 
+</view>
+
+<!--  图标icon  -->
+<view class="alltro">
+  <icon class="icon-box-img" type="success"></icon>
+  成功
+</view>
