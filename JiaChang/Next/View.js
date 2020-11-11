@@ -10,6 +10,13 @@ Page({
     scale: 1,
     toView: 'green',
     background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
+    iconSize: [20, 30, 40, 50, 60, 70],
+    iconType: [
+      'success', 'success_no_circle', 'info', 'warn', 'waiting', 'cancel', 'download', 'search', 'clear','success', 'success_no_circle', 'info'
+    ],
+    iconColor: [
+      'red', 'orange', 'yellow', 'green', 'rgb(0,255,255)', 'blue', 'purple'
+    ],
   },
 
   /**
@@ -91,4 +98,7 @@ Page({
       scrollTop: 0
     })
   },
+  progressover () {
+    console.log('进度条加载完毕')
+  }
 })

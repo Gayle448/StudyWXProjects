@@ -1,0 +1,46 @@
+<!--Next/opration.wxml-->
+<!-- 文本text:text 组件内只支持 text 嵌套;除了文本节点以外的其他节点都无法长按选中;-->
+<text space="false" decode="false" >
+  我是一段文本文字\n
+</text>
+<!-- <view class="container">
+  <view class="page-body">
+    <view class="page-section page-section-spacing">
+      <view class="text-box" scroll-y="true" scroll-top="{{scrollTop}}">
+        <text>{{text}}</text>
+      </view>
+      <button disabled="{{!canAdd}}" bindtap="add"> 添加一行数据</button>
+      <button disabled="{{!canRemove}}" bindtap="remove"> 删除一行数据</button>
+    </view>
+  </view>
+</view> -->
+<view class="btn-area">
+  <view class="body-view">
+    <text>{{text}}</text>
+    <button bindtap="add">添加一行数据</button>
+    <button bindtap="remove">删除一行数据</button>
+  </view>
+</view>
+
+<!-- 富文本 rich - text-->
+<view class="page-body">
+  <view class="page-section">
+    <view class="page-section-title">
+      传入html字符串
+    </view>
+    <view class="rich-text-wrp">
+      <rich-text nodes="{{html}}" bindtap="tap"></rich-text>
+    </view>
+  </view>
+
+  <view class="page-section">
+    <view class="page-section-title">
+      传入节点列表
+    </view>
+    <view class="rich-text-wrp">
+      <rich-text nodes="{{nodes}}" bindtap="tap"></rich-text>
+    </view>
+  </view>
+</view>
+
+

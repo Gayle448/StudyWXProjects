@@ -1,2 +1,12 @@
 <!--Next/detail.wxml-->
+<!-- 跳转方式一 -->
 <text bindtap="viewPage" class="alltro">look-view</text>
+
+<!-- <text bindtap="operationPage" class="alltro">operation-view</text> -->
+
+<!-- 跳转方式二 -->
+<navigator url="./opration" open-type="redirect">operation-view</navigator>
+
+<!-- 跳转到应用内的某个页面
+  navigate保留当前页面; 
+  redirect关闭当前页面，返回的时候直接回上上层;-->

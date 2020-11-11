@@ -70,5 +70,13 @@ Page({
         console.log('跳转到view页面')
       }
     })
+  },
+  operationPage : function () {
+    wx.navigateTo({
+      url: './opration',
+      success:function(res) {
+        console.log('跳到opration页面')
+      }
+    })
   } 
 })

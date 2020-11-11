@@ -140,7 +140,30 @@ movable-view 默认为绝对定位，top和left属性为0px;
 </view>
 
 <!--  图标icon  -->
-<view class="alltro">
+<!-- <view class="alltro">
   <icon class="icon-box-img" type="success"></icon>
   成功
+</view> -->
+
+<view class="group">
+<!-- wx:for应该是个for循环，遍历后面的数组，item是里面的对象，哈哈，聪明如我 -->
+  <block wx:for="{{iconSize}}">
+    <icon type="success" size="{{item}}"/>
+  </block>
 </view>
+
+<view class="group">
+  <block wx:for="{{iconType}}">
+    <icon type="{{item}}" size="40"/>
+  </block>
+</view>
+
+<view class="group">
+  <block wx:for="{{iconColor}}">
+    <icon type="success" size="40" color="{{item}}"/>
+  </block>
+</view>
+
+<!-- 进度条 duration:进度条加载1%的毫秒数-->
+<progress percent="20" show-info="10" border-radius="3" font-size="15" stroke-width="1" activeColor="yellow" backgroundColor="gray" active="true" active-mode="backwards" duration="200" bindactiveend="progressover"></progress>
+
