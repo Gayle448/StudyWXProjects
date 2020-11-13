@@ -122,3 +122,4 @@ mouter view --
 <view change:prop="{{test.propObserver}}" prop="{{propValue}}" bindtouchmove="{{test.touchmove}}" class="movable"></view> -->
 
 <button id="queryBtn" bindtap="queryAction" class="pinktro"> 点击我查当前节点位置 </button>
+

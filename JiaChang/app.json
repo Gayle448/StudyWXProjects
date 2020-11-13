@@ -6,7 +6,8 @@
     "second/second",
     "Next/detail",
     "Next/View",
-    "Next/opration"
+    "Next/opration",
+    "Next/button"
   ],
   "window": {
     "backgroundTextStyle": "light",

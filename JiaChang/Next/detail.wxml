@@ -6,7 +6,15 @@
 
 <!-- 跳转方式二 -->
 <navigator url="./opration" open-type="redirect">operation-view</navigator>
+<navigator url="./button" open-type="navigate"> button </navigator>
 
 <!-- 跳转到应用内的某个页面
   navigate保留当前页面; 
   redirect关闭当前页面，返回的时候直接回上上层;-->
+
+  <!-- 导航栏 设置 :只能是 page-meta 组件内的第一个节点，需要配合它一同使用。-->
+  <!-- 效果等同wx.setNavigationBarTitle wx.setNavigationBarColor  -->
+  <page-meta>
+    <navigation-bar title="详情页面" loading="true" front-color="#ffffff" background-color="#000000" color-animation-duration="2000" color-animation-timing-func="easeIn">
+    </navigation-bar>
+ </page-meta>
