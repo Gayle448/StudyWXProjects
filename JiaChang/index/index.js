@@ -198,6 +198,99 @@ Page({
     //       res[1].scrollTop // 显示区域的竖直滚动位置
     //   }
     //   )
+    },
+
+    textWxAPI () {
+      //1. 当前版本是否可用后面的API方法、属性等
+      wx.canIUse('console.log')
+      //2. 将 Base64 字符串转成 ArrayBuffer 对象
+      const base641 = 'CxYh'
+      const arrayBuffer1 = wx.base64ToArrayBuffer(base641)
+      //3. 要转换成 Base64 字符串的 ArrayBuffer 对象
+      const arrayBuffer2 = new Uint8Array([11,12,14])
+      const base642 = wx.arrayBufferToBase64(arrayBuffer2)
+      //4.获取系统信息
+      wx.getSystemInfo({
+        success: (result) => {
+          console.log(result.model)
+          console.log(result.pixelRatio)
+          console.log(result.windowHeight)
+        },
+      })
+      //5.更新微信客户端
+      //wx.updateWeChatApp()
+      //6.获取全局唯一的版本更新管理器，用于管理小程序更新。返回值：UpdateManager，更新管理器对象
+      wx.getUpdateManager()
+      //7.获取小程序启动时的参数，与App.onLaunch的回调参数一致。
+      wx.getLaunchOptionsSync()
+      // 8.获取本次小程序时的参数。如果当前时冷启动，则返回值与app.onlauch一致，如果时热启动，则与applonshow一致
+      wx.getEnterOptionsSync()
+      //9.监听未处理的 Promise 拒绝事件。该事件与 App.onUnhandledRejection 的回调时机与参数一致。
+      wx.onUnhandledRejection((result) => {
+        console.log(result.reason)
+      })
+      //10. 监听系统主题改变事件。该事件与 App.onThemeChange 的回调时机一致。只有在全局配置"darkmode": true时才会触发此事件。
+      wx.onThemeChange((result) => {
+        console.log(result.theme)
+      })
+      // 11.监听小程序要打开的页面不存在时间。该时间与APP.onPageNotFound的回调时机一致。
+      wx.onPageNotFound((result) => {
+        console.log(result.path)
+      })
+      //12.监听小程序错误事件。如脚本错误或API调用报错等。该事件与Appwx.onError的回调时机一致。
+      wx.onError((error) => {
+        console.log(error.error)
+      })
+      //13.监听音频因为受到系统占用而被中断开始事件。以下场景会触发此事件：闹钟、电话、FaceTime 通话、微信语音聊天、微信视频聊天。此事件触发后，小程序内所有音频会暂停。
+      wx.onAudioInterruptionBegin((res) => {
+      })
+      //14.监听音频中断结束事件。在收到 onAudioInterruptionBegin 事件之后，小程序内所有音频会暂停，收到此事件之后才可再次播放成功
+      wx.onAudioInterruptionEnd((res) => {
+      })
+      //15.监听小程序切前台事件。该事件与 App.onShow 的回调参数一致。
+      wx.onAppShow((result) => {
+        console.log(result.path)
+      })
+      //16.监听小程序切后台事件。该事件与 App.onHide 的回调时机一致。
+      wx.onAppHide((res) => {
+      })
+      //17.取消监听未处理的 Promise 拒绝事件
+      wx.offUnhandledRejection((result) => {
+      })
+      //18.取消监听系统主题改变事件
+      wx.offThemeChange((result) => {
+      })
+      //19. 取消监听小程序要打开的页面不存在事件
+      wx.offPageNotFound((result) => {
+      })
+      //20.取消监听小程序错误事件
+      wx.offError(
+      )
+      //21.取消监听音频中断结束事件
+      wx.offAudioInterruptionEnd((res) => {
+      })
+      //22. 取消监听音频因为受到系统占用而被中断开始事件
+      wx.offAudioInterruptionBegin((res) => {})
+      //23.取消监听小程序切前台事件
+      wx.offAppShow((result) => {})
+      //24.取消监听小程序切后台事件
+      wx.offAppHide((res) => {})
+      //25.设置是否打开调试开关
+      wx.setEnableDebug({
+        enableDebug: true,
+      })
+      //26.获取实时日志管理对象
+      const logger = wx.getRealtimeLogManager()
+      logger.info({Str:'hello world'},'info log',[1,2,3],100)
+      //27.获取日志管理器对象
+      const logM = wx.getLogManager({
+        level: 1,
+      })
+      logM.log({Str:'hello world'},'info log',[1,2,3],100)
+      //28. console
+      console.debug('这是debug日志')
+      // console.error('这是error日志')
+      console.group('')
     }
 })
 
