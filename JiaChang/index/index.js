@@ -291,6 +291,230 @@ Page({
       console.debug('这是debug日志')
       // console.error('这是error日志')
       console.group('')
+      //29.交互
+      //-- 消息提示框 wx.showLoading 和 wx.showToast 同时只能显示一个
+      wx.showToast({
+        title: '提示的内容',
+      })
+      wx.hideToast({
+        success: (res) => {},
+      })
+      wx.showLoading({
+        title: '提示的内容',
+      })
+      wx.hideLoading({
+        success: (res) => {},
+      })
+      wx.showModal({//显示模态对话框
+        title: '提示的标题',
+        content:'提示的内容',
+        cancelColor: '#ffffff',//取消按钮颜色
+      })
+      wx.showActionSheet({  //显示操作菜单
+        itemList: ['A','B','C'],
+        success (res) {
+          console.log(res.tapIndex)
+        },
+        fail (res) {
+          console.log(res.errMsg)
+        }
+      })
+      //-- 导航栏
+      //当前页面显示导航条加载动画
+      wx.showNavigationBarLoading({
+        success: (res) => {},
+      })
+      wx.hideNavigationBarLoading({
+        success: (res) => {},
+      })
+      wx.setNavigationBarTitle({
+        title: '当前页面导航栏标题',
+      })
+      wx.setNavigationBarColor({
+        backgroundColor: 'backgroundColor',
+        frontColor: 'frontColor',
+      })
+      //隐藏返回首页按钮
+      wx.hideHomeButton({
+        success: (res) => {},
+      })
+      //-- 背景
+      //动态设置下拉背景字体、loading 图的样式
+      wx.setBackgroundTextStyle({
+        textStyle: textStyle,
+      })
+      wx.setBackgroundColor({
+        backgroundColor: '#ffffff',
+      })
+      // -- Tabbar
+      wx.showTabBar({
+        animation: true,
+      })
+      //显示tabbar某一项的右上角的红点
+      wx.showTabBarRedDot({
+        index: 0,
+      })
+      wx.hideTabBar({
+        animation: true,
+      })
+      wx.hideTabBarRedDot({
+        index: 0,
+      })
+      //动态设置 tabBar 的整体样式
+      wx.setTabBarStyle({
+        backgroundColor: 'backgroundColor',
+      })
+      //动态设置 tabBar 某一项的内容
+      wx.setTabBarItem({
+        index: 0,
+      })
+      //为 tabBar 某一项的右上角添加文本
+      wx.setTabBarBadge({
+        index: 0,
+        text: 'text',
+      })
+      wx.removeTabBarBadge({
+        index: 0,
+      })
+      //-- 字体 动态加载网络字体，文件地址需为下载类型
+      wx.loadFontFace({
+        family: 'family',
+        source: 'source',
+      })
+      //-- 下拉刷新
+      wx.startPullDownRefresh({
+        success: (res) => {},
+      })
+      //停止下拉刷新
+      wx.stopPullDownRefresh({
+        success: (res) => {},
+      })
+      //-- 滚动 将页面滚动到目标未知，支持选择器和滚动距离两种定位方式
+      wx.pageScrollTo({
+        duration: 0,
+      })
+      //-- 动画 创建一个动画实例 animation。调用实例的方法来描述动画。最后通过动画实例的 export 方法导出动画数据传递给组件的 animation 属性。
+      wx.createAnimation({
+        delay: 0,
+      })
+      Animation.backgroundColor('#ffffff')
+      Animation.top() //设置 top 值
+      Animation.bottom('')  //设置 bottom 值
+      Animation.height() //设置高度
+      Animation.width() //设置宽度
+      Animation.left() //设置 left 值
+      Animation.right() //设置 left 值
+      Animation.matrix()  //
+      Animation.matrix3d() //
+      Animation.opacity() //设置透明度
+      Animation.rotate() //从原点顺时针旋转一个角度
+      Animation.rotate3d() //从 固定 轴顺时针旋转一个角度
+      Animation.rotateX() //从 X 轴顺时针旋转一个角度
+      Animation.rotateY() //从 Y 轴顺时针旋转一个角度
+      Animation.rotateZ() //从 Z 轴顺时针旋转一个角度
+      Animation.scale() //缩放
+      // ...
+      Animation.skew()  //对 X、Y 轴坐标进行倾斜
+      //,,,
+      Animation.step()  //表示一组动画完成。可以在一组动画中调用任意多个动画方法，一组动画中的所有动画会同时开始，一组动画完成后才会进行下一组动画。
+      Animation.translate() //平移变换
+      //...
+      Animation.export('导出动画队列')
+      // 置顶
+      //动态设置置顶栏文字内容。只有当前小程序被置顶时能生效，如果当前小程序没有被置顶，也能调用成功，但是不会立即生效，只有在用户将这个小程序置顶后才换上设置的文字内容
+      wx.setTopBarText({
+        text: '我是置顶文字',
+      })
+      //自定义组件：延迟一部分操作到下一个时间片再执行。（类似于 setTimeout）
+      //例子
+      Component({
+        doSth() {
+          this.setData({ number: 1 }) // 直接在当前同步流程中执行
+      
+          wx.nextTick(() => {
+            this.setData({ number: 3 }) // 在当前同步流程结束后，下一个时间片执行
+          })
+      
+          this.setData({ number: 2 }) // 直接在当前同步流程中执行
+        }
+      })
+      //菜单
+      //获取菜单按钮（右上角胶囊按钮）的布局位置信息。坐标信息以屏幕左上角为原点
+      wx.getMenuButtonBoundingClientRect()
+      //窗口
+      //设置窗口大小，该接口仅适用于 PC 平台
+      wx.setWindowSize({
+        height: 0,
+        width: 0,
+      })
+      //监听/取消监听窗口尺寸变化事件
+      wx.onWindowResize((result) => {})
+      wx.offWindowResize((result) => {})
+      //键盘
+      //监听/取消监听键盘高度变化
+      wx.onKeyboardHeightChange((result) => {})
+      wx.offKeyboardHeightChange(callback)
+      //在input、textarea等focus拉起键盘之后，手动调用此接口收起键盘
+      wx.hideKeyboard({ 
+        success: (res) => {},
+      })
+      //在input、textarea等focus之后，获取输入框的光标位置。注意：只有在focus的时候调用此接口才有效
+      wx.getSelectedTextRange({
+        success: (result) => {},
+      })
+
+      // 30.网络
+      //31.数据缓存
+      //32.媒体
+      //33.位置
+      //34.转发
+      //更新转发属性
+      wx.updateShareMenu({
+        activityId: 'activityId',
+      })
+      wx.hideShareMenu({
+        success: (res) => {},
+      })
+      wx.showShareMenu({ //显示当前页面的转发按钮
+        withShareTicket: true,
+      })
+      wx.getShareInfo({ //获取转发详细信息
+        shareTicket: 'shareTicket',
+      })
+      wx.authPrivateMessage() //验证私密消息
+      //35.画布 canvas
+      //36.文件
+      //保存文件系统的文件到用户磁盘
+      wx.saveFileToDisk({
+        filePath: 'filePath',
+      })
+      //保存文件到本地。注意：saveFile 会把临时文件移动，因此调用成功后传入的 tempFilePath 将不可用
+      wx.saveFile()
+      //删除本地缓存文件
+      wx.removeSavedFile({
+        filePath: 'filePath',
+      })
+      //新开页面打开文档
+      wx.openDocument({
+        filePath: 'filePath',
+      })
+      //获取该小程序下已保存的本地缓存文件列表
+      wx.getSavedFileList({
+        success: (result) => {},
+      })
+      //获取本地文件的文件信息
+      wx.getSavedFileInfo({
+        filePath: 'filePath',
+      })
+      //获取全局唯一的文件管理器
+      wx.getFileSystemManager()
+      //获取文件信息
+      wx.getFileInfo({
+        filePath: 'filePath',
+      })
+      //FileSystemManager
+      //判断当前文件是否一个目录
+  
     }
 })
 
