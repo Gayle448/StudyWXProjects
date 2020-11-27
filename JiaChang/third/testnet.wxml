@@ -1,0 +1,2 @@
+<!--third/testnet.wxml-->
+<button bindtap="request1">点我发起一个网络请求</button>

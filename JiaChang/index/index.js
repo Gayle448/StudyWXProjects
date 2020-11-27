@@ -512,9 +512,24 @@ Page({
       wx.getFileInfo({
         filePath: 'filePath',
       })
-      //FileSystemManager
-      //判断当前文件是否一个目录
-  
+      //FileSystemManager https://developers.weixin.qq.com/miniprogram/dev/api/file/FileSystemManager.access.html
+      //Stats 描述文件状态的对象
+      Stats.isDirectory() //判断当前文件是否一个目录
+      Stats.isFile()  //判断当前文件是否一个普通文件
+
+      //37.开放接口：登陆、小程序跳转、账号信息、用户信息、数据上报、支付、授权、设置、收货地址、卡券、发票、生物认证、微信运动、性能、订阅消息、微信红包、群工具；
+      //38.外围设备、iBeacon、NFC、WiFi、联系人、无障碍、蓝牙、电量、剪贴板、监听网络、屏幕、电话、加速计、罗盘、设备方向、陀螺仪、性能、扫码、振动；
+
+      //39. Worker
+      //创建一个worker 线程
+      const worker = wx.createWorker('scriptPath') //worker入口文件的绝对路径
+      //worker实例对象 方法
+      worker.onMessage()  //监听主线程/worker线程向当前线程发送的消息的事件
+      worker.postMessage() //向主线程/worker线程发送的消息
+      worker.terminate()  //结束当前 Worker 线程。仅限在主线程 worker 对象上调用。
+
+      //40.第三方平台
+      //41.WXML 高级，与wxml的交易
     }
 })
 

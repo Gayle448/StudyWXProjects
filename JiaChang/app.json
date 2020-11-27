@@ -7,7 +7,8 @@
     "Next/detail",
     "Next/View",
     "Next/opration",
-    "Next/button"
+    "Next/button",
+    "third/testnet"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -27,6 +28,10 @@
       {
         "pagePath": "logs/logs",
         "text": "第二标签页"
+      },
+      {
+        "pagePath": "third/testnet",
+        "text": "测试网络"
       }
     ],
     "color": "#228B22",
