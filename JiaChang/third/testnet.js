@@ -116,23 +116,23 @@ function createPromise(delay,message) {
     // setTimeout(() => {
       console.log('执行第一个请求');
       // resolve('下一个'); 
-      reject('下一个'); //进了这里 
-      // wx.request({
-      //   url: 'https://wcyc.ziguiw.com',//http://10.9.176.40:828
-      //   success: function success (request) {
-      //     console.log('请求成功');
-      //     resolve(request.data);
-      //   },
-      //   fail: function fail(error) {
-      //     console.log('请求失败');
-      //     reject(error); //进了这里 
-      //   },
-      //   complete: function complete(aaa) {
-      //     console.log(message);
-      //     console.log('请求结果:'+aaa);
-      //     // return '返回给下级';
-      //   }
-      // })
+      // reject('下一个'); //进了这里 
+      wx.request({
+        url: 'http://10.193.1.150:8080',//
+        success: function success (request) {
+          console.log('请求成功');
+          resolve(request.data);
+        },
+        fail: function fail(error) {
+          console.log('请求失败');
+          reject(error); //进了这里 
+        },
+        complete: function complete(aaa) {
+          console.log(message);
+          console.log('请求结果:'+aaa);
+          // return '返回给下级';
+        }
+      })
     // }, 1000); //1秒后执行
   }) 
 }
