@@ -85,7 +85,7 @@ Page({
 // }).catch(function (err) {
 //   console.log(err);
 // });
-  }
+  },
   //41.demo测试
 // var request = function request(url, needSubDomain, method, data) {
 //   var _url = API_BASE_URL + (needSubDomain ? '/' + subDomain : '') + url;
@@ -110,6 +110,15 @@ Page({
 //     });
 //   });
 // }
+request2 : function () {
+  mdnsTest_mydns_http_tcp();
+},
+
+request3 : function () {
+  mdns2_http_tcp();
+},
+
+
 })
 function createPromise(delay,message) {
   return new Promise(function (resolve,reject) { //异步线程
@@ -129,10 +138,75 @@ function createPromise(delay,message) {
         },
         complete: function complete(aaa) {
           console.log(message);
-          console.log('请求结果:'+aaa);
+          console.log('请求结果:',aaa);
           // return '返回给下级';
         }
       })
     // }, 1000); //1秒后执行
   }) 
 }
+
+function mdnsTest_mydns_http_tcp() {
+
+  
+  wx.startLocalServiceDiscovery({//开始搜索
+    serviceType:'_mydns._http._tcp.',
+    success:function(){
+      console.log('请求成功');
+
+      wx.onLocalServiceFound((result) => {
+        console.log("hhh")
+        console.log(result);
+      }),
+      wx.onLocalServiceResolveFail((result) => {
+        console.log("onLocalServiceResolveFail")
+        console.log(result);
+      }),
+      wx.onLocalServiceDiscoveryStop((res) => {
+        console.log("onLocalServiceDiscoveryStop")
+        console.log(res);
+      }),
+      wx.onLocalServiceLost((result) => {
+        console.log("onLocalServiceLost")
+        console.log(result);
+      })
+
+    },
+    fail:function(){
+      console.log('请求失败');
+    },
+    complete:function (params) {
+      console.log("jieshu");
+      console.log('请求jieshu'+params);
+      console.log(params);
+    }
+  })
+}
+
+function mdns2_http_tcp(){
+  let that = this
+   let serviceList = []
+    let resolveFailList = []
+    wx.startLocalServiceDiscovery({
+      serviceType:'_http._tcp.',
+      success:function(res){
+        console.log("startLocalServiceDiscovery:success")
+        console.log(res)
+        wx.onLocalServiceFound(function (obj) {
+          console.log(obj)
+          serviceList.push(obj)
+          that.setData({
+            lists: serviceList
+          })
+        })
+      },
+      fail:function(err){
+        console.log(err)
+      },
+      complete:function(){
+        console.log('complete')
+      }
+    })
+      
+}
+

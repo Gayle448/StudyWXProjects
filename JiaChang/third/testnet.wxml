@@ -1,2 +1,4 @@
 <!--third/testnet.wxml-->
 <button bindtap="request1">点我发起一个网络请求</button>
+<button bindtap="request2">2点我发起一个mdns网络请求mydns.http.tcp</button>
+<button bindtap="request3">点我发起一个mdns2网络请求http.tcp</button>

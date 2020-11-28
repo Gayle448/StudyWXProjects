@@ -8,7 +8,8 @@
     "Next/View",
     "Next/opration",
     "Next/button",
-    "third/testnet"
+    "third/testnet",
+    "third/mdns"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,6 +33,10 @@
       {
         "pagePath": "third/testnet",
         "text": "测试网络"
+      },
+      {
+        "pagePath": "third/mdns",
+        "text": "mdns"
       }
     ],
     "color": "#228B22",
