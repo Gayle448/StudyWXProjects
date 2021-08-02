@@ -16,7 +16,8 @@
     "navigationBarBackgroundColor": "#f5f5f9",
     "navigationBarTitleText": "测试测试",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#ff0000"
+    "backgroundColor": "#ff0000",
+    "pageOrientation": "auto"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
@@ -63,5 +64,11 @@
     }
   },
   "debug": true,
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+ 
+  "useExtendedLib": {
+    "weui":true
+  },
+  "darkmode": true
+
 }

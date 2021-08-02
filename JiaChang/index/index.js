@@ -1,9 +1,20 @@
+// https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html
+
 const app = getApp()
 
-//使用 Page() 构造器注册页面
+//使用 Page() 构造器注册页面 : 小程序中的每个页面，都需要在页面对应的 js 文件中进行注册，指定页面的初始数据、生命周期回调、事件处理函数等。
+
+//页面可以引用 behaviors 。 behaviors 可以用来让多个页面有相同的数据字段和方法。
+var myBehavior = require('my-behaviors')
+// ('./my-behaviors.js')
+
 Page({
+  
+  // todo 这里没起到作用?
+  behaviors : [myBehavior],
+
   data: {//参与页面渲染的数据。data 是页面第一次渲染使用的初始数据。
-    //这里面不能打console ?
+    //这里面不能打console ? 傻不拉几,这相当于一个字典正在,键值对赋值,打什么log喽;
     //页面加载时，data 将会以JSON字符串的形式由逻辑层传至渲染层，因此data中的数据必须是可以转成JSON的类型：字符串，数字，布尔值，对象，数组。渲染层可以通过 WXML 对数据进行绑定。
     text : '我的测试数据',
     clickName : "handleClick",
@@ -20,9 +31,11 @@ Page({
     staffA:{firstname:'chen',lastName:'jian'},
     staffB:{firstname:'han',lastName:'xu'},
     staffC:{firstname:'chen',lastName:'xuyuan'},
-    inputValue: "输入测试数据"
+    inputValue: "输入测试数据",
+    nextPageText:"我是传给下一个页面的数据1",
+    currentpageText:"当前页面测试"
   },
-  onLoad: function () {//页面渲染后 执行
+  onLoad: function () {//页面渲染后 执行 == viewdidload
     console.log('代码片段是一种迷你、可分享的小程序或小游戏项目，可用于分享小程序和小游戏的开发经验、展示组件和 API 的使用、复现开发问题和 Bug 等。可点击以下链接查看代码片段的详细文档：')
     console.log('https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html')
     console.log('https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html')
@@ -36,6 +49,7 @@ Page({
      /*数组中第一个元素为首页，最后一个元素为当前页面。
      不要尝试修改页面栈，会导致路由以及页面状态错误。
      不要在 App.onLaunch 的时候调用 getCurrentPages()，此时 page 还没有生成。
+     在小程序中所有页面的路由全部由框架进行管理。框架以栈的形式维护了当前的所有页面。
      */
 
      //console 类型：
@@ -47,18 +61,23 @@ Page({
      console.group('----分组日志')
      console.groupEnd()
      
+     //测试 behaviors
+     console.log('测试behavior:' + this.data.testText)
+
+     //生命周期函数获取data数据方式
+     console.log(this.data.currentpageText)
   },
   onShow: function () {
-//页面出现在前台执行
+//页面出现在前台执行, == viewwillappear
   },
   onReady () {
     //页面首次渲染完毕时执行；一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互。注意：对界面内容进行设置的 API 如wx.setNavigationBarTitle，请在onReady之后进行。
   },
   onHide () {
-    //页面隐藏/切入后台时执行；如 wx.navigateTo 或底部 tab 切换到其他页面，小程序切入后台等。
+    //页面隐藏/切入后台时执行；如 wx.navigateTo 或底部 tab 切换到其他页面，小程序切入后台等。  == viewwilldisappear
   },
   onUnload () {
-    //页面销毁时执行；如wx.redirectTo或wx.navigateBack到其他页面时。
+    //页面销毁时执行；如wx.redirectTo或wx.navigateBack到其他页面时。 == dealloc
   },
   onPullDownRefresh () {
     //触发下拉刷新时执行
@@ -125,7 +144,7 @@ Page({
         text:'set some data for updating view.' //这次要改变的数据;将 this.data 中的 key 对应的值改变成 value。其中 key 可以以数据路径的形式给出，支持改变数组中的某一项或对象的某个属性，如 array[2].message，a.b.c.d，并且不需要在 this.data 中预先定义。
       },
       function () { //传参对象2
-        //setData引起的 界面更新渲染完毕后的 回调函数
+        //setData引起的 界面更新渲染完毕后的 回调函数 ???
         /*
         1.直接修改 this.data 而不调用 this.setData 是无法改变页面的状态的，还会造成数据不一致。
         2.仅支持设置可 JSON 化的数据。
@@ -149,21 +168,49 @@ Page({
       console.log('呀，又被你点击了！')
     },
     jumpToNext : function () { 
+      // 1. 自己写的示例
+      // 如果一个页面由另一个页面通过 wx.navigateTo 打开，这两个页面间将建立一条数据通道
+      // navigateTo, redirectTo 只能打开非 tabBar 页面。
+
+      let self = this //⚠️
+      
       wx.navigateTo({
         url: '../demo/demo',
         events: {
           // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
           getDataFromDemoPage : function (data) {
-            console.log('demo页面传参数过来----')
-            console.log(data) //下个页面传过来的数据
+            console.log('demo页面传参数过来----'+data['data']) //下个页面传过来的数据
           }
         },
         success: function (res) {
           console.log('index跳转成功----')
           //通过eventChannel向被打开页面传送数据
-          res.eventChannel.emit('getDataFromIndexPage', {data : '从index页面传到下个页面的数据'}) //todo 这个下级页面通信报错；待查
+          // res.eventChannel.emit('getDataFromIndexPage', {data : 'index页面传参1'}) //注意,这里传的参数值是一个对象哦 OK
+          res.eventChannel.emit('getDataFromIndexPage', {data : self.data.nextPageText}) //注意,这里传的参数值是一个对象哦 OK
         }
       })
+//2. 微信官方示例
+      // wx.navigateTo({
+      //   url: '../demo/demo',
+      //   events: {
+      //     // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+      //     acceptDataFromOpenedPage: function(data) {
+      //       console.log('二级页面传给一级页面'+data['data'])
+      //     },
+      //     someEvent: function(data) {
+      //       console.log('二级页面传给一级页面event-'+data['data'])
+      //     }
+      //   },
+      //   success: function(res) {
+      //     // 通过eventChannel向被打开页面传送数据
+      //     res.eventChannel.emit('acceptDataFromOpenerPage', { data: 'test1' })
+      //   }
+      // })
+      
+      //3. 参考 泽元小程序使用的是如下方法,测试这么用不行 ??? todo
+      // wx.navigateTo({
+      //   url: '../demo/demo?lastpagetext='+self.nextPageText,
+      // })
     },
     handletap1 : function () {
       console.log('handletap1')
