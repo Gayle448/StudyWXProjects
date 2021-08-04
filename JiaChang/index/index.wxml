@@ -123,3 +123,6 @@ mouter view --
 
 <button id="queryBtn" bindtap="queryAction" class="pinktro"> 点击我查当前节点位置 </button>
 
+<view bindtap="viewTap"> 我是 组件事件处理函数viewTap</view>
+
+<view bindtap="commonMenthod"> 测试behavior的公共方法</view>

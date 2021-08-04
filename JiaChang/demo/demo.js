@@ -14,7 +14,7 @@ Page({
 
  
 
-    let self = this //⚠️
+    let self = this //⚠️这里要赋值!
 
     console.log('获取打印数据1:' + this.data.lastpagetext) //在外面这么获取不会报错
     //1. 自己写的示例
