@@ -1,18 +1,18 @@
-// logs.js
+// API/wxapi.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    haha : '我是logs的数据'
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('>>>>LogsB----onLoad')
+    console.log('用于测试微信部分API')
   },
 
   /**
@@ -26,21 +26,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('>>>>LogsB----onShow')
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log('>>>>LogsB----onHide')
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log('>>>>LogsB----onUnload')
+
   },
 
   /**
@@ -62,22 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  //跳转到第二个页面
-  jumpToSecondPage : function () {
-    wx.navigateTo({
-      url: '../second/second',
-      success:function(res) {
-        console.log('跳转到第二个标签页的二级页面')
-      }
-    })
-  },
-  gotoUIPage : function () {
-    wx.navigateTo({
-      url: '../Next/detail',
-      success:function(res){
-        console.log('当前查看的是UI页面')
-      }
-    })
   }
 })

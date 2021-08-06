@@ -12,7 +12,7 @@
 <!-- 添加一个按钮点击事件 -->
 <text bindtap="viewClick" class="ontro"> 点击我吧 </text>
 <view>
-  <button class="intro" bindtap="jumpToNext">点击进入下一个页面</button>
+  <button class="intro" bindtap="jumpToNext">点击进入下一个页面Demo</button>
 </view>
 <!-- clickName是一个data里的属性值，key-对应的value是对应function的名字 -->
 <text bindtap="{{clickName}}">再来点击我，传值</text> 
@@ -123,6 +123,15 @@ mouter view --
 
 <button id="queryBtn" bindtap="queryAction" class="pinktro"> 点击我查当前节点位置 </button>
 
-<view bindtap="viewTap"> 我是 组件事件处理函数viewTap</view>
+<!-- 有作用 -->
+<button bindtap="viewTap"> 我是 组件事件处理函数viewTap</button>
+<!--  -->
+<button bindtap="commonMenthod"> 测试behavior的公共方法</button>
 
-<view bindtap="commonMenthod"> 测试behavior的公共方法</view>
+<button bindtap="myBehaviorMethod">点击触发 behavior 方法</button>
+
+<view>{{commonText}}</view>
+
+<view bindtap="helloEvent">你好</view>
+
+<view bindtap="goodByeEvent">再见</view>

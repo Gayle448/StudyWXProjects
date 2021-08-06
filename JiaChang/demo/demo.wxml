@@ -12,3 +12,5 @@
 <!-- 本来没有这个变量的值，不会显示，后面赋值后，自动刷新显示 -->
 
 <view>{{lastpagetext}}</view>
+<view bindtap="gotoLogB">跳转到logB页面</view>
+<view bindtap="gotoTestD">跳转到testD页面</view>

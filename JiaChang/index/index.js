@@ -3,14 +3,16 @@
 const app = getApp()
 
 //使用 Page() 构造器注册页面 : 小程序中的每个页面，都需要在页面对应的 js 文件中进行注册，指定页面的初始数据、生命周期回调、事件处理函数等。
-// 简单的页面可以使用 Page() 进行构造。复杂的可以用其他的构造?怎么构造?? TODO
+// 简单的页面可以使用 Page() 进行构造。复杂的可以用其他的怎么构造? 见下
+// 复杂的页面使用Component()构造器来构造页面,类似于自定义组件,可以想自定义组件一样使用behaviors等高级特性.(https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/component.html)
+//TODO 先学完自定义组件
 
 //页面可以引用 behaviors 。 behaviors 可以用来让多个页面有相同的数据字段和方法。
 // var myBehavior = require('my-behaviors') 官方文档里的demo已经过时了,这个声明无效 转为 下面 ES6就可以 
 // ('./my-behaviors.js')
 //引入 一个 叫myBehavior 的CommonJS (公共JS)
 import myBehavior from 'my-behaviors'
-
+var common = require('common.js')
 
 Page({
   
@@ -46,6 +48,7 @@ Page({
     //页面渲染后 执行 == viewdidload (监听页面加载,等式暂时这么理解,但是后面有了解到是渲染前触发 TODO)
     //页面加载时触发。一个页面只会调用一次，可以在 onLoad 的参数中获取打开当前页面路径中的参数。
     console.log('1. jc-onload')
+    console.log('>>>>indexA----onLoad')
 
     console.log('代码片段是一种迷你、可分享的小程序或小游戏项目，可用于分享小程序和小游戏的开发经验、展示组件和 API 的使用、复现开发问题和 Bug 等。可点击以下链接查看代码片段的详细文档：')
     console.log('https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/devtools.html')
@@ -57,7 +60,7 @@ Page({
 
      //获取当前页面栈
      const pages = getCurrentPages()
-     console.log('获取当前页面栈',pages[0]) 
+     console.log('获取当前页面栈(index)',pages[0]) 
      /*数组中第一个元素为首页，最后一个元素为当前页面。
      不要尝试修改页面栈，会导致路由以及页面状态错误。
      不要在 App.onLaunch 的时候调用 getCurrentPages()，此时 page 还没有生成。
@@ -81,6 +84,7 @@ Page({
   onShow: function () {
 //页面出现在前台执行, == viewwillappear
   console.log('2. jc-onShow')
+  console.log('>>>>indexA----onShow')
   },
   onReady () {
     //页面首次渲染完毕时执行；一个页面只会调用一次，代表页面已经准备妥当，可以和视图层进行交互。注意：对界面内容进行设置的 API 如wx.setNavigationBarTitle，请在onReady之后进行。
@@ -90,11 +94,14 @@ Page({
   onHide () {
     //页面隐藏/切入后台时执行；如 wx.navigateTo 或底部 tab 切换到其他页面，小程序切入后台等。  == viewwilldisappear
     console.log('jc-onHide')
+    console.log('>>>>indexA----onHide')
+    
   },
   onUnload () {
     //页面销毁时执行；如wx.redirectTo或wx.navigateBack到其他页面时。 == dealloc
     //之前看到一个例子,讲了几个页面切换+路由跳转的几种情况 是进onHide还是onUnload;忘记在哪了,讲一个出栈入栈的,这个概念还得深刻以下. TODO
     console.log('jc-onUnload')
+    console.log('>>>>indexA----onUnload')
   },
   onPullDownRefresh () {
     //触发下拉刷新时执行
@@ -202,11 +209,22 @@ Page({
     jumpToNext : function () { 
       // 1. 自己写的示例
       // 如果一个页面由另一个页面通过 wx.navigateTo 打开，这两个页面间将建立一条数据通道
-      // navigateTo, redirectTo 只能打开非 tabBar 页面。
-
+      /* 
+      `switchTab` 只能打开 tabBar 页面,关闭 所有 非tabbar页面。
+      `reLaunch` 重启,关闭所有页面,打开任意应用内页面。
+      `redirectTo` 重定向,关闭当前页面,跳转到应用内 非tabbar页的其他任意页面.
+      `navigateTo` 保留当前页面,跳转到应用 非tabBar页面,栈最多十层.
+      `navigateBack` 关闭当前页面,返回上一页或多级页面.
+      */
+     /*
+     wx.和this.的区别是，页面路由器中的方法调用时，相对路径永远相对于 this 指代的页面或自定义组件。
+     this.pageRouter 和 this.router 在页面中将获得同样的页面路由器对象。
+     如果在自定义组件中调用， this.pageRouter 将相对于自定义组件所在的页面来进行路由跳转，而 this.router 相对于自定义组件自身的路径。
+     */
       let self = this //⚠️
       
       wx.navigateTo({
+        // eventchannel 页面间事件通信通道
         url: '../demo/demo',
         events: {
           // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
@@ -216,6 +234,7 @@ Page({
         },
         success: function (res) {
           console.log('index跳转成功----')
+          //emit 触发一个事件:
           //通过eventChannel向被打开页面传送数据
           // res.eventChannel.emit('getDataFromIndexPage', {data : 'index页面传参1'}) //注意,这里传的参数值是一个对象哦 OK
           res.eventChannel.emit('getDataFromIndexPage', {data : self.data.nextPageText}) //注意,这里传的参数值是一个对象哦 OK
@@ -243,7 +262,30 @@ Page({
       // wx.navigateTo({
       //   url: '../demo/demo?lastpagetext='+self.nextPageText,
       // })
+      
+      // 打开一个小程序
+      // wx.navigateToMiniProgram({
+      //   appId: 'appId',
+      // }),
+      // //返回到上一个小程序
+      // wx.navigateBackMiniProgram({
+      //   extraData: extraData,
+      // }),
+      // //退出当前小程序,必须点击操作
+      // wx.exitMiniProgram({
+      //   success: (res) => {},
+      // })
+
     },
+
+    helloEvent : function(){
+      common.sayHello('jchen')
+    },
+    goodByeEvent : function(){
+      common.sayGoodBye('jchen')
+    },
+
+    //分割线
     handletap1 : function () {
       console.log('handletap1')
     },
@@ -434,7 +476,7 @@ Page({
         index: 0,
       })
       wx.hideTabBar({
-        animation: true,
+        animation: false,
       })
       wx.hideTabBarRedDot({
         index: 0,

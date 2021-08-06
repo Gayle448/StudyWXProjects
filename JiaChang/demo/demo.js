@@ -11,8 +11,10 @@ Page({
 
   onLoad: function (option) { //todo 这个下级页面通信报错；待查
     console.log('demo页面加载成功----')
+    console.log('>>>>DemoC----onLoad')
 
- 
+    const pages = getCurrentPages()
+    console.log('获取当前页面栈(demo)',pages) 
 
     let self = this //⚠️这里要赋值!
 
@@ -20,6 +22,7 @@ Page({
     //1. 自己写的示例
     //被打开的页面可以通过 this.getOpenerEventChannel() 方法来获得一个 EventChannel 对象；
     const eventChannel = this.getOpenerEventChannel()
+    //on 持续监听一个事件; once 监听一个事件一次,触发后失效; off 取消监听一个事件,第二个参数为只取消监听的函数,否则取消所有监听函数.
     eventChannel.on('getDataFromIndexPage', function (data) {  //从上级index页面调到下一个页面传值过来
       console.log('index页面传参数过来----'+data['data'])
 
@@ -49,6 +52,53 @@ Page({
      // 3. 参考 泽元小程序使用的是如下方法,测试这么用不行 ??? todo
     // self.lastpagetext = option.nextPageText
     // console.log('获取打印数据2:' + option.nextPageText) //这么获取不会报错
+
+    // 转发
+// 显示当前页面的转发按钮;
+    wx.showShareMenu({
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+    // ,
+    //分享图片弹窗
+    // wx.showShareImageMenu({
+    //   path: 'path',
+    // }),
+    //转发视频到聊天
+    // wx.shareVideoMessage(),
+    //转发文件到聊天
+    // wx.shareFileMessage(),
+    // 右上角 复制链接触发事件
+    // wx.onCopyUrl((result) => {}),
+    // 取消监听 复制链接触发事件
+    // wx.offCopyUrl((result) => {}),
+    // 获取转发详细信息
+    // wx.getShareInfo({
+    //   shareTicket: 'shareTicket',
+    // }),
+    // 更新转发属性
+    // wx.updateShareMenu({
+    //   activityId: 'activityId',
+    // }),
+    // 验证私密信息
+    // wx.authPrivateMessage({
+    //   shareTicket: 'shareTicket',
+    // }),
+    // 隐藏当前页面的转发按钮
+    // wx.hideShareMenu({
+    //   menus: [],
+    // })
+    
+  },
+  onShow: function(){
+    console.log('>>>>DemoC----onShow')
+  },
+  onHide: function(){
+
+    console.log('>>>>DemoC----onHide')
+  },
+  onUnload: function(){
+
+    console.log('>>>>DemoC----onUnload')
   },
 
   changeText: function() {
@@ -79,6 +129,16 @@ Page({
   addNewField: function() {
     this.setData({
       'newField.text': 'new data'
+    })
+  },
+  gotoLogB : function() {
+    wx.switchTab({
+      url: '../logs/logs',
+    })
+  },
+  gotoTestD : function() {
+    wx.navigateTo({
+      url: '../Component/testD',
     })
   }
 

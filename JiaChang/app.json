@@ -25,11 +25,11 @@
     "list": [
       {
         "pagePath": "index/index",
-        "text": "首页"
+        "text": "首页A"
       },
       {
         "pagePath": "logs/logs",
-        "text": "第二标签页"
+        "text": "第二标签页B"
       },
       {
         "pagePath": "third/testnet",
@@ -65,10 +65,8 @@
   },
   "debug": true,
   "lazyCodeLoading": "requiredComponents",
- 
   "useExtendedLib": {
-    "weui":true
+    "weui": true
   },
   "darkmode": true
-
 }

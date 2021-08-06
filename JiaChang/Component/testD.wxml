@@ -1,0 +1,5 @@
+<!--Component/testD.wxml-->
+<text>Component/testD.wxml</text>
+<view>测试页面路由,切换机制,新建D页面</view>
+<view bindtap="gotoLogB">跳转到logB页面</view>
+<view bindtap="gotowxapi">跳转到wxapi</view>
